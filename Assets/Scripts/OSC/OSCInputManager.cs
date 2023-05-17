@@ -12,8 +12,8 @@ public class OSCInputManager : MonoBehaviour
 
     public void InputMovingSpeed(Vector3 inputSpeed)
     {
-        speed.x = inputSpeed.y;
-        speed.y = inputSpeed.z;
+        speed.x = inputSpeed.x;
+        speed.y = inputSpeed.y;
     }
 
     public void InputAcceleration(int inputAcceleration)

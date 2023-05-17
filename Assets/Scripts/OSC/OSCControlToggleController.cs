@@ -12,6 +12,7 @@ public class OSCControlToggleController : MonoBehaviour
     void Start()
     {
         toggle = GetComponent<Toggle>();
+        PenguinBehavior.isReceiveOSCInput = toggle.isOn;
     }
 
     public void SetOSCControlSetting()
