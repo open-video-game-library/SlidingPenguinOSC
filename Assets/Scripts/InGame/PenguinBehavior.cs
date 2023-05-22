@@ -32,7 +32,6 @@ namespace penguin{
         // ペンギンに加える力。
         private Vector3 force;
         
-        
         // Start is called before the first frame update
         void Start()
         {
@@ -42,7 +41,8 @@ namespace penguin{
        
         // Update is called once per frame
         void FixedUpdate()
-        {
+        {   
+            isReceiveOSCInput = false;
             bool isInGame = (statusManager.CurrentStatus == InGameStatus.InGameNormal ||
                              statusManager.CurrentStatus == InGameStatus.HurryUp);
             if (isInGame)
@@ -100,7 +100,6 @@ namespace penguin{
                 force = new Vector3(horizon, vertical, 0) * sensitivity * 3;
             }
             penguinRigidBody.AddForce(force);
-
         }
 
         private void Rotate(float vertical, float horizon)
