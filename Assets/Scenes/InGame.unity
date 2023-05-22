@@ -3297,6 +3297,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4393093955608792354}
     - target: {fileID: 8501397371686556172, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
+      propertyPath: sense
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501397371686556172, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
       propertyPath: statusManager
       value: 
       objectReference: {fileID: 1616605693}
