@@ -20,28 +20,28 @@ namespace penguin{
         // SE再生・停止クラス
         [SerializeField] private InGameAudio audio;
 
+        // OSC入力を受け取る際に用いる。isReceiveOSCInputがtrueのとき、OSC入力でキャラクターを動かす。
         [SerializeField] private OSCInputManager osc;
         [SerializeField] public static bool isReceiveOSCInput;
         
         // ペンギンの基本感度。大きいほど入力に対する移動量が大きい。
         private float sensitivity;
-        
+
+        // trueの場合、ペンギンの動きをAddForceメソッドで制御する。falseの場合は、スクリプトから制御する。
+        private bool usePhysics;
+
         // 加速フラグ。速度を変更するために使用する。
-        private bool isAcceleration;
-        
-        // ペンギンに加える力。
-        private Vector3 force;
+        private bool speedUp;
         
         // Start is called before the first frame update
         void Start()
         {
             sensitivity = ParameterManager.sensitivity;
+            usePhysics = false;
         }
 
-       
-        // Update is called once per frame
-        void FixedUpdate()
-        {   
+        void Update()
+        {
             bool isInGame = (statusManager.CurrentStatus == InGameStatus.InGameNormal ||
                              statusManager.CurrentStatus == InGameStatus.HurryUp);
             if (isInGame)
@@ -59,11 +59,13 @@ namespace penguin{
                     horizon = Input.GetAxis("Horizontal");
                     vertical = Input.GetAxis("Vertical");
                 }
-                
+
                 // 移動入力があった際の処理
                 if (vertical != 0 || horizon != 0)
                 {
-                    Move(vertical, horizon);
+                    if (usePhysics) { PhysicsMove(vertical, horizon); }
+                    else { Move(vertical, horizon); }
+
                     Rotate(vertical, horizon);
                 }
                 else
@@ -74,23 +76,31 @@ namespace penguin{
                 // 加速入力があった際の処理
                 if (!isReceiveOSCInput && (Input.GetButtonDown("Submit") || Input.GetKeyDown(KeyCode.Space)))
                 {
-                    Accelerate();
+                    SpeedUp();
                 }
                 else if (isReceiveOSCInput && osc.acceleration == 1)
                 {
-                    Accelerate();
+                    SpeedUp();
                 }
             }
+        }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {   
             
         }
 
-        private void Move(float vertical, float horizon)
+        private void PhysicsMove(float vertical, float horizon)
         {
             // play animation
             penguinMoveAnimator.SetBool("IsMoving", true);
+
+            // ペンギンに加える力
+            Vector3 force;
             
             // プレイヤーオブジェクトに力を加える
-            if (!isAcceleration)
+            if (!speedUp)
             {
                 force = new Vector3(horizon, vertical, 0) * sensitivity;
             }
@@ -99,6 +109,25 @@ namespace penguin{
                 force = new Vector3(horizon, vertical, 0) * sensitivity * 3;
             }
             penguinRigidBody.AddForce(force);
+        }
+
+        private void Move(float vertical, float horizon)
+        {
+            // play animation
+            penguinMoveAnimator.SetBool("IsMoving", true);
+
+            // プレイヤーオブジェクトを加速度運動させる
+            if (!speedUp)
+            {
+                // 速度を、加速度をもとに計算
+            }
+            else
+            {
+                // スピードアップ状態のときの速度を、加速度をもとに計算
+            }
+
+            // 移動処理
+            // transform.Translate(0.0f, 0.0f, 0.0f);
         }
 
         private void Rotate(float vertical, float horizon)
@@ -114,12 +143,11 @@ namespace penguin{
             {
                 transform.rotation = Quaternion.Euler(0, 0, angle + 90.0f);
             }
-
         }
 
-        private void Accelerate()
+        private void SpeedUp()
         {
-            isAcceleration = true;
+            speedUp = true;
             StartCoroutine("PlayAccelerationAnimation");
             audio.acceleration.Play();
         }
@@ -128,7 +156,7 @@ namespace penguin{
         {
             penguinMoveAnimator.SetBool("IsAcceleration", true);
             yield return new WaitForSeconds (0.7f);
-            isAcceleration = false;
+            speedUp = false;
             penguinMoveAnimator.SetBool("IsAcceleration", false);
         }
 
@@ -139,7 +167,6 @@ namespace penguin{
             penguinRigidBody.angularVelocity = 0;
             enabled = false;
         }
-
     }
 }
 
