@@ -42,7 +42,6 @@ namespace penguin{
         // Update is called once per frame
         void FixedUpdate()
         {   
-            isReceiveOSCInput = false;
             bool isInGame = (statusManager.CurrentStatus == InGameStatus.InGameNormal ||
                              statusManager.CurrentStatus == InGameStatus.HurryUp);
             if (isInGame)
