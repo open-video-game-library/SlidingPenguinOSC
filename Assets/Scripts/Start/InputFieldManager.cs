@@ -40,7 +40,7 @@ public class InputFieldManager : MonoBehaviour
         if (!int.TryParse(limitedTime.text, out int intValue)
             || intValue < 0)
         {
-            limitedTime.text = ParameterManager.limitedTime.ToString("f2");
+            limitedTime.text = ParameterManager.limitedTime.ToString();
             return;
         }
         ParameterManager.limitedTime = intValue;
