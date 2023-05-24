@@ -126,15 +126,17 @@ namespace penguin{
             else { penguinAcceleration = ParameterManager.acceleration; }
 
             // 速度を、加速度をもとに計算
-            if (vertical < -0.0f)
+            if (vertical < 0.0f)
             {
                 // 左に動く
                 if (speed.y - penguinAcceleration > -penguinMaximumSpeed * Mathf.Abs(vertical)) { speed.y -= penguinAcceleration; }
+                else { speed.y += penguinAcceleration; }
             }
             else if (vertical > 0.0f)
             {
                 // 右に動く
                 if (speed.y + penguinAcceleration < penguinMaximumSpeed * Mathf.Abs(vertical)) { speed.y += penguinAcceleration; }
+                else { speed.y -= penguinAcceleration; }
             }
             else { speed.y *= friction; }
 
@@ -142,14 +144,17 @@ namespace penguin{
             {
                 // 前に進む
                 if (speed.x + penguinAcceleration < penguinMaximumSpeed * Mathf.Abs(horizon)) { speed.x += penguinAcceleration; }
+                else { speed.x -= penguinAcceleration; }
             }
-            else if (horizon < -0.0f)
+            else if (horizon < 0.0f)
             {
                 // 後ろに進む
                 if (speed.x - penguinAcceleration > -penguinMaximumSpeed * Mathf.Abs(horizon)) { speed.x -= penguinAcceleration; }
+                else { speed.x += penguinAcceleration; }
             }
             else { speed.x *= friction; }
 
+            Debug.Log(speed);
             transform.Translate(speed * Time.deltaTime, Space.World);
         }
 
