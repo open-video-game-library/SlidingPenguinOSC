@@ -491,7 +491,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7783133, y: 1}
+    m_SensorSize: {x: 1.6495485, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3228,6 +3228,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 810784003043855797, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4083395022868290558, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3299,6 +3303,10 @@ PrefabInstance:
     - target: {fileID: 8501397371686556172, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
       propertyPath: sense
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501397371686556172, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
+      propertyPath: usePhysics
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8501397371686556172, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
       propertyPath: statusManager

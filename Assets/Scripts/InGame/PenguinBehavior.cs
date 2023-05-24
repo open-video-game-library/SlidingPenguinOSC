@@ -23,12 +23,21 @@ namespace penguin{
         // OSC入力を受け取る際に用いる。isReceiveOSCInputがtrueのとき、OSC入力でキャラクターを動かす。
         [SerializeField] private OSCInputManager osc;
         [SerializeField] public static bool isReceiveOSCInput;
-        
+
+        // ペンギンの現在の移動速度。
+        private Vector3 speed;
+        // ペンギンの速度上限。
+        private float penguinMaximumSpeed;
+        // ペンギンの加速度。
+        private float penguinAcceleration;
+        // 氷の摩擦係数。
+        private float friction;
+
         // ペンギンの基本感度。大きいほど入力に対する移動量が大きい。
         private float sensitivity;
 
         // trueの場合、ペンギンの動きをAddForceメソッドで制御する。falseの場合は、スクリプトから制御する。
-        private bool usePhysics;
+        [SerializeField] private bool usePhysics = false;
 
         // 加速フラグ。速度を変更するために使用する。
         private bool speedUp;
@@ -36,8 +45,10 @@ namespace penguin{
         // Start is called before the first frame update
         void Start()
         {
+            penguinMaximumSpeed = ParameterManager.maximumSpeed;
+            penguinAcceleration = ParameterManager.acceleration;
+            friction = ParameterManager.friction;
             sensitivity = ParameterManager.sensitivity;
-            usePhysics = false;
         }
 
         void Update()
@@ -60,28 +71,28 @@ namespace penguin{
                     vertical = Input.GetAxis("Vertical");
                 }
 
-                // 移動入力があった際の処理
-                if (vertical != 0 || horizon != 0)
+                if (usePhysics)
                 {
-                    if (usePhysics) { PhysicsMove(vertical, horizon); }
-                    else { Move(vertical, horizon); }
-
-                    Rotate(vertical, horizon);
+                    // 移動入力があった際の処理
+                    if (vertical != 0.0f || horizon != 0.0f)
+                    {
+                        PhysicsMove(vertical, horizon);
+                        Rotate(vertical, horizon);
+                    }
+                    else { penguinMoveAnimator.SetBool("IsMoving", false); }
                 }
                 else
                 {
-                    penguinMoveAnimator.SetBool("IsMoving", false);
+                    Move(vertical, horizon);
+
+                    // 移動入力があった際の処理
+                    if (vertical != 0.0f || horizon != 0.0f) { Rotate(vertical, horizon); }
+                    if (vertical == 0.0f && horizon == 0.0f) { penguinMoveAnimator.SetBool("IsMoving", false); }
                 }
 
                 // 加速入力があった際の処理
-                if (!isReceiveOSCInput && (Input.GetButtonDown("Submit") || Input.GetKeyDown(KeyCode.Space)))
-                {
-                    SpeedUp();
-                }
-                else if (isReceiveOSCInput && osc.acceleration == 1)
-                {
-                    SpeedUp();
-                }
+                if (!isReceiveOSCInput && (Input.GetButtonDown("Submit") || Input.GetKeyDown(KeyCode.Space))) { SpeedUp(); }
+                else if (isReceiveOSCInput && osc.acceleration == 1) { SpeedUp(); }
             }
         }
 
@@ -100,14 +111,8 @@ namespace penguin{
             Vector3 force;
             
             // プレイヤーオブジェクトに力を加える
-            if (!speedUp)
-            {
-                force = new Vector3(horizon, vertical, 0) * sensitivity;
-            }
-            else
-            {
-                force = new Vector3(horizon, vertical, 0) * sensitivity * 3;
-            }
+            if (!speedUp) { force = new Vector3(horizon, vertical, 0) * sensitivity; }
+            else { force = new Vector3(horizon, vertical, 0) * sensitivity * 3; }
             penguinRigidBody.AddForce(force);
         }
 
@@ -117,17 +122,35 @@ namespace penguin{
             penguinMoveAnimator.SetBool("IsMoving", true);
 
             // プレイヤーオブジェクトを加速度運動させる
-            if (!speedUp)
-            {
-                // 速度を、加速度をもとに計算
-            }
-            else
-            {
-                // スピードアップ状態のときの速度を、加速度をもとに計算
-            }
+            if (speedUp) { penguinAcceleration = ParameterManager.acceleration * 3.0f; }
+            else { penguinAcceleration = ParameterManager.acceleration; }
 
-            // 移動処理
-            // transform.Translate(0.0f, 0.0f, 0.0f);
+            // 速度を、加速度をもとに計算
+            if (vertical < -0.0f)
+            {
+                // 左に動く
+                if (speed.y - penguinAcceleration > -penguinMaximumSpeed * Mathf.Abs(vertical)) { speed.y -= penguinAcceleration; }
+            }
+            else if (vertical > 0.0f)
+            {
+                // 右に動く
+                if (speed.y + penguinAcceleration < penguinMaximumSpeed * Mathf.Abs(vertical)) { speed.y += penguinAcceleration; }
+            }
+            else { speed.y *= friction; }
+
+            if (horizon > 0.0f)
+            {
+                // 前に進む
+                if (speed.x + penguinAcceleration < penguinMaximumSpeed * Mathf.Abs(horizon)) { speed.x += penguinAcceleration; }
+            }
+            else if (horizon < -0.0f)
+            {
+                // 後ろに進む
+                if (speed.x - penguinAcceleration > -penguinMaximumSpeed * Mathf.Abs(horizon)) { speed.x -= penguinAcceleration; }
+            }
+            else { speed.x *= friction; }
+
+            transform.Translate(speed * Time.deltaTime, Space.World);
         }
 
         private void Rotate(float vertical, float horizon)
@@ -135,14 +158,8 @@ namespace penguin{
             // プレイヤーオブジェクトが向く方向を更新する
             float angle = Mathf.Atan(vertical / horizon) * Mathf.Rad2Deg;
             
-            if (horizon >= 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, angle - 90.0f);
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(0, 0, angle + 90.0f);
-            }
+            if (horizon >= 0) { transform.rotation = Quaternion.Euler(0, 0, angle - 90.0f); }
+            else { transform.rotation = Quaternion.Euler(0, 0, angle + 90.0f); }
         }
 
         private void SpeedUp()
