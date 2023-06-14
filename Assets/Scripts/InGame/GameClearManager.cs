@@ -20,7 +20,7 @@ namespace penguin
         [SerializeField] private TimeKeeper timeKeeper;
         
         // CSVファイルで出力するデータをまとめるクラス
-        [SerializeField] private OutputDataManager outputDataManager;
+        // [SerializeField] private OutputDataManager outputDataManager;
 
         // ペンギンの挙動を制御するクラス
         [SerializeField] private PenguinBehavior penguinBehavior;
@@ -46,7 +46,7 @@ namespace penguin
             inGameUISwitcher.UnActivateInGameUI();
 
             // データポスト
-            outputDataManager.PostData(true, FishManager.GetAcquiredNumber(), timeKeeper.elapsedTime.ToString(), 200.0f, ParameterManager.sensitivity, ParameterManager.limitedTime); 
+            // outputDataManager.PostData(true, FishManager.GetAcquiredNumber(), timeKeeper.elapsedTime.ToString(), 200.0f, ParameterManager.sensitivity, ParameterManager.limitedTime); 
             
             // ペンギンを停止させ、操作をoffにする
             StartCoroutine(penguinBehavior.Stop(0.1f));

@@ -34,7 +34,7 @@ namespace penguin
         [SerializeField] private InGameUISwitcher inGameUISwitcher;
 
         // CSVファイルで出力するデータをまとめるクラス
-        [SerializeField] private OutputDataManager outputDataManager;
+        // [SerializeField] private OutputDataManager outputDataManager;
         
         // ペンギンのスタート地点のy座標。進んだ距離を算出するために参照
         private float penguinStartPositionY;
@@ -82,14 +82,11 @@ namespace penguin
         // CSV出力するデータをセットし、postする関数を叩く。
         private void SetPostData()
         {
-            if (outputDataManager != null)
-            {
-                int fishNum = FishManager.GetAcquiredNumber();
-                float distance = penguinModel.transform.position.y - penguinStartPositionY;
-                outputDataManager.PostData(false, fishNum, "undefined", distance, ParameterManager.sensitivity, ParameterManager.limitedTime);        
-            }
+            int fishNum = FishManager.GetAcquiredNumber();
+            float distance = penguinModel.transform.position.y - penguinStartPositionY;
+            // outputDataManager.PostData(false, fishNum, "undefined", distance, ParameterManager.sensitivity, ParameterManager.limitedTime);
         }
-        
+
         // SE/bgmの再生
         private IEnumerator PlayClearSound()
         {

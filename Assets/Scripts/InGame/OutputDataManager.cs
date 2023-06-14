@@ -37,9 +37,11 @@ public class OutputDataManager : MonoBehaviour
          data.FishNumber = fishNumber; // 獲得魚数
          data.ClearTime = clearTime; // クリアタイム
          data.MovingDistance　=　distance; // スタート地点からの到達距離(ゴールした場合"200")
-         data.Sensitivity = sensitivity; //操作感度
+         data.Sensitivity = sensitivity; // 操作感度
          data.LimitedTime = limitedTime; // 制限時間
+
          string json = JsonUtility.ToJson(data); // json形式に変換してjsに渡す
+
  #if UNITY_WEBGL && !UNITY_EDITOR
          addData(json);
  #endif
