@@ -22,11 +22,10 @@ namespace penguin
 
         private void Clicked()
         {
+            GameDataExport.CreateCSV();
             audio.bgm.Pause();
             audio.TransitionClick.Play();
             uiSwitcher.StartCoroutine("ActivateInGameUI");
         }
-        
     }
-
 }
