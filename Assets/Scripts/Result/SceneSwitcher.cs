@@ -24,9 +24,9 @@ namespace penguin
             retryButton.onClick.AddListener(() => StartCoroutine("LoadInGameScene"));
         }
         
-        
         private IEnumerator LoadStartScene()
         {
+            GameDataExport.SaveCSV();
             audio.TransitionClick.Play();
             yield return new WaitForSeconds(1.0f);
             SceneManager.LoadScene ("Start");
@@ -39,5 +39,4 @@ namespace penguin
             SceneManager.LoadScene ("InGame");
         }
     }
-
 }

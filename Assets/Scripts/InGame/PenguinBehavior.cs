@@ -154,7 +154,6 @@ namespace penguin{
             }
             else { speed.x *= friction; }
 
-            Debug.Log(speed);
             transform.Translate(speed * Time.deltaTime, Space.World);
         }
 

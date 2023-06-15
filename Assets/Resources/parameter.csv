@@ -1,0 +1,5 @@
+sensitivity,3
+limitedTime,120
+maximumSpeed,15
+acceleration,0.1
+friction,0.98
