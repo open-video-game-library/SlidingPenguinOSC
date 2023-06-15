@@ -18,6 +18,8 @@ public class GameDataExport : MonoBehaviour
         string minute = currentTime.Minute.ToString();
         string second = currentTime.Second.ToString();
 
+        // SaveDataフォルダが存在しない場合は、新しく作る
+        if (!Directory.Exists("SaveData")) { Directory.CreateDirectory("SaveData"); }
         // 新しくcsvファイルを作成
         sw = new StreamWriter(@"SaveData/game_data_" + year + month + day + hour + minute + second + ".csv", false, Encoding.GetEncoding("Shift_JIS"));
 
