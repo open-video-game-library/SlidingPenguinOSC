@@ -22,7 +22,9 @@ namespace penguin
 
         private void Clicked()
         {
-            GameDataExport.CreateCSV();
+            GameDataExport.CreateScoreCSV();
+            GameDataExport.CreateTrailCSV();
+
             audio.bgm.Pause();
             audio.TransitionClick.Play();
             uiSwitcher.StartCoroutine("ActivateInGameUI");
