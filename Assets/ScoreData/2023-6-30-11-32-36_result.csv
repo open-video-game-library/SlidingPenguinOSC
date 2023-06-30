@@ -1,0 +1,5 @@
+﻿Success,FishNumber,ClearTime,Distance,Sensitivity,LimitedTime,MaximumSpeed,Acceleration,Friction
+False,3,undefined,82.86313,3,120,15,0.1,0.98
+False,0,undefined,37.76294,3,120,15,0.1,0.98
+False,5,undefined,127.6031,3,120,15,0.1,0.98
+True,9,14.0528,200,3,120,15,0.1,0.98

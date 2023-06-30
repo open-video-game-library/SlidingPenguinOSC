@@ -7,4 +7,6 @@ public class ParameterManager : MonoBehaviour
     public static float maximumSpeed = 15.0f;
     public static float acceleration = 0.10f;
     public static float friction = 0.98f;
+    public static bool gameEffect = false;
+    public static bool respawn = true;
 }

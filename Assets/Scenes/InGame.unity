@@ -134,6 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403829d2954f41b2bee9e53ac1eb5e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &118966017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1483113615982436922, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
+  m_PrefabInstance: {fileID: 1483113615106285751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &263541652 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7672952892715573079, guid: c69357c89b1684a6893d9f70a87eebfc, type: 3}
@@ -1671,6 +1676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collider
       objectReference: {fileID: 0}
+    - target: {fileID: 3654721871283200823, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
+      propertyPath: respawnManager
+      value: 
+      objectReference: {fileID: 1483113615106285759}
     - target: {fileID: 7368860224751424460, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
       propertyPath: goalCollider
       value: 
@@ -1682,7 +1691,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1483113615982436903, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
   m_PrefabInstance: {fileID: 1483113615106285751}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 118966017}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcccd0ae1d5b248779d4856792fc2654, type: 3}
@@ -1693,6 +1702,21 @@ PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 1483113614672327865, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
   m_PrefabInstance: {fileID: 1483113615106285751}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1483113615106285759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118966017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601b2e66a3b4e9f42b8cd88ae0983263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusManager: {fileID: 1616605693}
+  penguinModel: {fileID: 3717622017213520729}
+  _penguinBehavior: {fileID: 993276029758175365}
 --- !u!1 &3717622017213520729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5450605764527436240, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
