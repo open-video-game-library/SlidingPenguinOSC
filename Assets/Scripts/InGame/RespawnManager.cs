@@ -7,31 +7,34 @@ public class RespawnManager : MonoBehaviour
 {
     // 現在のステータスを管理するクラス
     [SerializeField] private InGameStatusManager statusManager;
+    // ペンギンのGameObject
+    [SerializeField] private GameObject penguin;
     // ペンギンのモデル
     [SerializeField] private GameObject penguinModel;
     // ペンギンの挙動を制御するクラス
-    [SerializeField] private PenguinBehavior _penguinBehavior;
+    [SerializeField] private PenguinBehavior penguinBehavior;
+    // InGameシーンのSE再生・停止クラス
+    [SerializeField] private InGameAudio audio;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private RespawnCamera respawnCamera;
 
-    // Update is called once per frame
-    void Update()
+    public IEnumerator Respawn()
     {
-        
-    }
+        InGameStatus originalState = statusManager.CurrentStatus;
 
-    public void Respawn()
-    {
         // ペンギンを停止させ、操作をoffにする
-        StartCoroutine(_penguinBehavior.Stop(0.5f));
+        StartCoroutine(penguinBehavior.Stop(0.5f));
         penguinModel.SetActive(false);
+        audio.drop.Play();
         statusManager.CurrentStatus = InGameStatus.CourseOut;
-
-        // 画面をフェードアウトさせる処理
+        
         // ペンギンをスタート地点に戻す処理
+        yield return new WaitForSeconds(2.0f);
+        respawnCamera.Teleport();
+        penguin.transform.position = Vector3.zero;
+        penguin.transform.eulerAngles = Vector3.zero;
+        penguin.GetComponent<PenguinBehavior>().enabled = true;
+        penguinModel.SetActive(true);
+        statusManager.CurrentStatus = originalState;
     }
 }

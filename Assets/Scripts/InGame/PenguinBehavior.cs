@@ -209,10 +209,20 @@ namespace penguin
 
         public IEnumerator Stop(float stopTime)
         {
-            yield return new WaitForSeconds (stopTime);
-            penguinRigidBody.velocity = Vector3.zero;
-            penguinRigidBody.angularVelocity = 0;
-            enabled = false;
+            if (usePhysics)
+            {
+                yield return new WaitForSeconds(stopTime);
+                penguinRigidBody.velocity = Vector3.zero;
+                penguinRigidBody.angularVelocity = 0;
+                enabled = false;
+            }
+            else
+            {
+                yield return new WaitForSeconds(stopTime);
+                speed = Vector3.zero;
+                penguinAcceleration = 0.0f;
+                enabled = false;
+            }
         }
     }
 }

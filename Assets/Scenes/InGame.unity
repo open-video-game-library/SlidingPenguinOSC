@@ -460,6 +460,7 @@ GameObject:
   - component: {fileID: 960633487}
   - component: {fileID: 960633486}
   - component: {fileID: 960633488}
+  - component: {fileID: 960633489}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Player
@@ -538,6 +539,18 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &960633489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960633485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124937d62378bbc4b8cddc73795f6684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1016961482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269604f74c0099d4588e2bad0a7e6d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1900697436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7210853629775051006, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
+  m_PrefabInstance: {fileID: 8661500254785661577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1918224433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,7 +1561,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8501397371686556172, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
   m_PrefabInstance: {fileID: 8661500254785661577}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1900697436}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91830170ed2a04f7c98055acfebd75d2, type: 3}
@@ -1715,8 +1733,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusManager: {fileID: 1616605693}
+  penguin: {fileID: 1900697436}
   penguinModel: {fileID: 3717622017213520729}
-  _penguinBehavior: {fileID: 993276029758175365}
+  penguinBehavior: {fileID: 993276029758175365}
+  audio: {fileID: 4393093955608792354}
+  respawnCamera: {fileID: 960633489}
 --- !u!1 &3717622017213520729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5450605764527436240, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}

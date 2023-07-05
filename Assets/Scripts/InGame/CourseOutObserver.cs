@@ -17,7 +17,7 @@ public class CourseOutObserver : MonoBehaviour
             if (ParameterManager.respawn)
             {
                 // スタート地点から復活
-                respawnManager.Respawn();
+                StartCoroutine(respawnManager.Respawn());
             }
             else
             {
