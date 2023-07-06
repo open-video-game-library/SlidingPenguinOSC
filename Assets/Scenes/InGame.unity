@@ -134,6 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403829d2954f41b2bee9e53ac1eb5e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &118966017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1483113615982436922, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
+  m_PrefabInstance: {fileID: 1483113615106285751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &263541652 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7672952892715573079, guid: c69357c89b1684a6893d9f70a87eebfc, type: 3}
@@ -455,6 +460,7 @@ GameObject:
   - component: {fileID: 960633487}
   - component: {fileID: 960633486}
   - component: {fileID: 960633488}
+  - component: {fileID: 960633489}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Player
@@ -533,6 +539,18 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!114 &960633489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960633485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124937d62378bbc4b8cddc73795f6684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1016961482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1215,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269604f74c0099d4588e2bad0a7e6d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1900697436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7210853629775051006, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
+  m_PrefabInstance: {fileID: 8661500254785661577}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1918224433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,7 +1561,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8501397371686556172, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}
   m_PrefabInstance: {fileID: 8661500254785661577}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1900697436}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91830170ed2a04f7c98055acfebd75d2, type: 3}
@@ -1671,6 +1694,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collider
       objectReference: {fileID: 0}
+    - target: {fileID: 3654721871283200823, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
+      propertyPath: respawnManager
+      value: 
+      objectReference: {fileID: 1483113615106285759}
     - target: {fileID: 7368860224751424460, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
       propertyPath: goalCollider
       value: 
@@ -1682,7 +1709,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1483113615982436903, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
   m_PrefabInstance: {fileID: 1483113615106285751}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 118966017}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcccd0ae1d5b248779d4856792fc2654, type: 3}
@@ -1693,6 +1720,24 @@ PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 1483113614672327865, guid: 31ad8e8c75e404a5789d8cf81fe1d6ad, type: 3}
   m_PrefabInstance: {fileID: 1483113615106285751}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1483113615106285759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118966017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601b2e66a3b4e9f42b8cd88ae0983263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusManager: {fileID: 1616605693}
+  penguin: {fileID: 1900697436}
+  penguinModel: {fileID: 3717622017213520729}
+  penguinBehavior: {fileID: 993276029758175365}
+  audio: {fileID: 4393093955608792354}
+  respawnCamera: {fileID: 960633489}
 --- !u!1 &3717622017213520729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5450605764527436240, guid: 11e2a7c433def4acbb8d10e3f4c07f68, type: 3}

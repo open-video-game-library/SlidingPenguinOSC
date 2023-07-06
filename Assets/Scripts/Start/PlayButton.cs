@@ -13,6 +13,8 @@ namespace penguin
         
         // ボタン押下時のUIスイッチ処理のために参照
         [SerializeField] private HomeUISwitcher uiSwitcher;
+
+        [SerializeField] private ParameterReader parameterReader;
         
         // Start is called before the first frame update
         private void Start()
@@ -22,7 +24,10 @@ namespace penguin
 
         private void Clicked()
         {
-            GameDataExport.CreateCSV();
+            if (ParameterManager.playConsecutively) { parameterReader.SetParameters(ExperimentManager.trialCount); }
+            GameDataExport.CreateScoreCSV();
+            GameDataExport.CreateTrailCSV();
+
             audio.bgm.Pause();
             audio.TransitionClick.Play();
             uiSwitcher.StartCoroutine("ActivateInGameUI");

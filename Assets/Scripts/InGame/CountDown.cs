@@ -50,6 +50,14 @@ namespace penguin
             audio.countdown.Play();
         }
 
+        public IEnumerator QuickStart()
+        {
+            Initialize();
+            statusManager.CurrentStatus = InGameStatus.CountDown;
+            yield return new WaitForSeconds(2.0f);
+            audio.countdown.Play();
+        }
+
         private void FixedUpdate()
         {
             if (statusManager.CurrentStatus == InGameStatus.CountDown)

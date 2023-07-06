@@ -5,9 +5,27 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace penguin{
+public class Trail
+{
+    public string timeStamp;
+    public float x;
+    public float y;
+
+    public Trail(string _timeStamp, float _x, float _y)
+    {
+        timeStamp = _timeStamp;
+        x = _x;
+        y = _y;
+    }
+}
+
+namespace penguin
+{
     public class PenguinBehavior : MonoBehaviour
     {
+        private int trailFrame = 0;
+        public static List<Trail> penguinTrail = new List<Trail>();
+
         // 現在のステータスを管理するクラス
         [SerializeField] private InGameStatusManager statusManager;
 
@@ -45,6 +63,9 @@ namespace penguin{
         // Start is called before the first frame update
         void Start()
         {
+            trailFrame = 0;
+            penguinTrail = new List<Trail>();
+
             penguinMaximumSpeed = ParameterManager.maximumSpeed;
             penguinAcceleration = ParameterManager.acceleration;
             friction = ParameterManager.friction;
@@ -57,6 +78,17 @@ namespace penguin{
                              statusManager.CurrentStatus == InGameStatus.HurryUp);
             if (isInGame)
             {
+                DateTime currentTime = DateTime.Now;
+                string year = currentTime.Year.ToString();
+                string month = currentTime.Month.ToString();
+                string day = currentTime.Day.ToString();
+                string hour = currentTime.Hour.ToString();
+                string minute = currentTime.Minute.ToString();
+                string second = currentTime.Second.ToString();
+
+                penguinTrail.Add(new Trail(year + "年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒" + trailFrame + "f", transform.position.x, transform.position.y));
+                trailFrame++;
+
                 float horizon;
                 float vertical;
 
@@ -94,12 +126,6 @@ namespace penguin{
                 if (!isReceiveOSCInput && (Input.GetButtonDown("Submit") || Input.GetKeyDown(KeyCode.Space))) { SpeedUp(); }
                 else if (isReceiveOSCInput && osc.acceleration == 1) { SpeedUp(); }
             }
-        }
-
-        // Update is called once per frame
-        void FixedUpdate()
-        {   
-            
         }
 
         private void PhysicsMove(float vertical, float horizon)
@@ -183,12 +209,20 @@ namespace penguin{
 
         public IEnumerator Stop(float stopTime)
         {
-            yield return new WaitForSeconds (stopTime);
-            penguinRigidBody.velocity = Vector3.zero;
-            penguinRigidBody.angularVelocity = 0;
-            enabled = false;
+            if (usePhysics)
+            {
+                yield return new WaitForSeconds(stopTime);
+                penguinRigidBody.velocity = Vector3.zero;
+                penguinRigidBody.angularVelocity = 0;
+                enabled = false;
+            }
+            else
+            {
+                yield return new WaitForSeconds(stopTime);
+                speed = Vector3.zero;
+                penguinAcceleration = 0.0f;
+                enabled = false;
+            }
         }
     }
 }
-
-

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 using System.IO;
 using TMPro;
 
 public class ParameterReader : MonoBehaviour
 {
-    private TextAsset parameterCsvFile; // CSVファイル
-    private List<string[]> parameterDatas = new List<string[]>(); // CSVの中身を入れるリスト;
+    // CSVの中身を入れるリスト
+    public static List<string[]> parameterDatas = new List<string[]>(); 
 
     [SerializeField] private TMP_InputField sensitivity;
     [SerializeField] private TMP_InputField limitedTime;
@@ -16,29 +17,28 @@ public class ParameterReader : MonoBehaviour
 
     void Start()
     {
-        parameterCsvFile = Resources.Load("parameter") as TextAsset; // Resouces下のCSV読み込み
-        StringReader reader = new StringReader(parameterCsvFile.text);
+        parameterDatas.Clear();
+        StreamReader reader = new StreamReader(Application.dataPath + "/Parameter/parameter.csv", Encoding.GetEncoding("UTF-8"));
+        string line;
 
-        // , で分割しつつ一行ずつ読み込み
-        // リストに追加していく
-        while (reader.Peek() != -1) // reader.Peaekが-1になるまで
+        while ((line = reader.ReadLine()) != null)
         {
-            string line = reader.ReadLine(); // 一行ずつ読み込み
-            parameterDatas.Add(line.Split(',')); // , 区切りでリストに追加
+            string[] splitLine = line.Split(",");
+            parameterDatas.Add(splitLine);
         }
+        ExperimentManager.trialNum = parameterDatas.Count - 1;
+        Debug.Log(ExperimentManager.trialNum + "回の試行を行います．");
     }
 
-    public void SetParameters()
+    public void SetParameters(int trialCount)
     {
         // ParameterManager で定義されているパラメータに、CSVファイルで設定したパラメータを上書きする
-        if (parameterCsvFile)
-        {
-            SetSensitivityValue(parameterDatas[0][1]);
-            SetLimitedTimeValue(parameterDatas[1][1]);
-            SetMaximumSpeedValue(parameterDatas[2][1]);
-            SetAccelerationValue(parameterDatas[3][1]);
-            SetFrictionValue(parameterDatas[4][1]);
-        }
+        SetSensitivityValue(parameterDatas[trialCount][0]);
+        SetLimitedTimeValue(parameterDatas[trialCount][1]);
+        SetMaximumSpeedValue(parameterDatas[trialCount][2]);
+        SetAccelerationValue(parameterDatas[trialCount][3]);
+        SetFrictionValue(parameterDatas[trialCount][4]);
+        SetWaitTimeNextValue(parameterDatas[trialCount][5]);
     }
 
     private void SetSensitivityValue(string value)
@@ -74,5 +74,11 @@ public class ParameterReader : MonoBehaviour
         if (!float.TryParse(value, out float floatValue) || floatValue < 0.0f || floatValue > 1.0f) { return; }
         friction.text = value;
         ParameterManager.friction = floatValue;
+    }
+
+    private void SetWaitTimeNextValue(string value)
+    {
+        if (!float.TryParse(value, out float floatValue) || floatValue < 0.0f) { return; }
+        ParameterManager.waitTimeNext = floatValue;
     }
 }

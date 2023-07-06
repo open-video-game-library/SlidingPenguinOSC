@@ -6,6 +6,7 @@ public class QuitApplicationManager : MonoBehaviour
 {
     private void OnApplicationQuit()
     {
-        GameDataExport.SaveCSV();
+        GameDataExport.SaveCSV(ExportData.ScoreData);
+        GameDataExport.SaveCSV(ExportData.TrailData);
     }
 }
