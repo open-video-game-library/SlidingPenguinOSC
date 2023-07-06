@@ -29,7 +29,7 @@ public class RespawnManager : MonoBehaviour
         statusManager.CurrentStatus = InGameStatus.CourseOut;
         
         // ペンギンをスタート地点に戻す処理
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.50f);
         respawnCamera.Teleport();
         penguin.transform.position = Vector3.zero;
         penguin.transform.eulerAngles = Vector3.zero;

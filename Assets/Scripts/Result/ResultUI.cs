@@ -64,6 +64,7 @@ namespace penguin
             else
             {
                 resultSprite.texture = gameOverSprite;
+                if (ParameterManager.playConsecutively) { ExperimentManager.countDown = true; }
             }
         }
 
@@ -89,11 +90,13 @@ namespace penguin
                     acquiredFishNumberText.text = (i + 1).ToString();
                     audio.CountUp.Play();
                 }
+                if (ParameterManager.playConsecutively) { ExperimentManager.countDown = true; }
             }
             else
             {
                 acquiredFishNumberText.color = Color.yellow;
                 acquiredFishNumberText.text = acquiredFishNumber.ToString();
+                if (ParameterManager.playConsecutively) { ExperimentManager.countDown = true; }
             }
         
             retryButton.SetActive(true);

@@ -20,6 +20,26 @@ public class InputFieldManager : MonoBehaviour
         friction.text = ParameterManager.friction.ToString("f2");
     }
 
+    void Update()
+    {
+        if (ParameterManager.playConsecutively)
+        {
+            sensitivity.interactable = false;
+            limitedTime.interactable = false;
+            maximumSpeed.interactable = false;
+            acceleration.interactable = false;
+            friction.interactable = false;
+        }
+        else
+        {
+            sensitivity.interactable = true;
+            limitedTime.interactable = true;
+            maximumSpeed.interactable = true;
+            acceleration.interactable = true;
+            friction.interactable = true;
+        }
+    }
+
     public void SetSensitivityValue()
     {
         if (!float.TryParse(sensitivity.text, out float floatValue)

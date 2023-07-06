@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audio: {fileID: 0}
   uiSwitcher: {fileID: 0}
+  parameterReader: {fileID: 0}
 --- !u!1 &529766003369629477
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,6 @@ namespace penguin
 {
     public class StageIntroductionCamera : MonoBehaviour
     {
-        // ステージ紹介用カメラのTransform
-        public Transform transform;
-
         // ステージ紹介用カメラの初期座標
         private Vector3 initialPosition;
 

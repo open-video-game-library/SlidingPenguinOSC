@@ -6,8 +6,8 @@ using TMPro;
 
 public class ParameterReader : MonoBehaviour
 {
-    // private TextAsset parameterCsvFile; // CSVファイル
-    private List<string[]> parameterDatas = new List<string[]>(); // CSVの中身を入れるリスト
+    // CSVの中身を入れるリスト
+    public static List<string[]> parameterDatas = new List<string[]>(); 
 
     [SerializeField] private TMP_InputField sensitivity;
     [SerializeField] private TMP_InputField limitedTime;
@@ -17,6 +17,7 @@ public class ParameterReader : MonoBehaviour
 
     void Start()
     {
+        parameterDatas.Clear();
         StreamReader reader = new StreamReader(Application.dataPath + "/Parameter/parameter.csv", Encoding.GetEncoding("UTF-8"));
         string line;
 
@@ -25,16 +26,19 @@ public class ParameterReader : MonoBehaviour
             string[] splitLine = line.Split(",");
             parameterDatas.Add(splitLine);
         }
+        ExperimentManager.trialNum = parameterDatas.Count - 1;
+        Debug.Log(ExperimentManager.trialNum + "回の試行を行います．");
     }
 
-    public void SetParameters()
+    public void SetParameters(int trialCount)
     {
         // ParameterManager で定義されているパラメータに、CSVファイルで設定したパラメータを上書きする
-        SetSensitivityValue(parameterDatas[1][0]);
-        SetLimitedTimeValue(parameterDatas[1][1]);
-        SetMaximumSpeedValue(parameterDatas[1][2]);
-        SetAccelerationValue(parameterDatas[1][3]);
-        SetFrictionValue(parameterDatas[1][4]);
+        SetSensitivityValue(parameterDatas[trialCount][0]);
+        SetLimitedTimeValue(parameterDatas[trialCount][1]);
+        SetMaximumSpeedValue(parameterDatas[trialCount][2]);
+        SetAccelerationValue(parameterDatas[trialCount][3]);
+        SetFrictionValue(parameterDatas[trialCount][4]);
+        SetWaitTimeNextValue(parameterDatas[trialCount][5]);
     }
 
     private void SetSensitivityValue(string value)
@@ -70,5 +74,11 @@ public class ParameterReader : MonoBehaviour
         if (!float.TryParse(value, out float floatValue) || floatValue < 0.0f || floatValue > 1.0f) { return; }
         friction.text = value;
         ParameterManager.friction = floatValue;
+    }
+
+    private void SetWaitTimeNextValue(string value)
+    {
+        if (!float.TryParse(value, out float floatValue) || floatValue < 0.0f) { return; }
+        ParameterManager.waitTimeNext = floatValue;
     }
 }
