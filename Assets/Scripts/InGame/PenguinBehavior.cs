@@ -76,6 +76,7 @@ namespace penguin
         {
             bool isInGame = (statusManager.CurrentStatus == InGameStatus.InGameNormal ||
                              statusManager.CurrentStatus == InGameStatus.HurryUp);
+
             if (isInGame)
             {
                 DateTime currentTime = DateTime.Now;
