@@ -82,7 +82,7 @@ namespace penguin
             float distance = penguinModel.transform.position.y - penguinStartPositionY;
 
             // outputDataManager.PostData(false, fishNum, "undefined", distance, ParameterManager.sensitivity, ParameterManager.limitedTime);
-            GameDataExport.ExportGameData(false, FishManager.GetAcquiredNumber(), "undefined", distance, PenguinBehavior.penguinTrail,
+            GameDataExport.ExportGameData(false, ParameterManager.shareHaptic, FishManager.GetAcquiredNumber(), "undefined", distance, PenguinBehavior.penguinTrail,
                 ParameterManager.sensitivity, ParameterManager.limitedTime, ParameterManager.maximumSpeed, ParameterManager.acceleration, ParameterManager.friction);
         }
 

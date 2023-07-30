@@ -32,7 +32,7 @@ public class GameDataExport : MonoBehaviour
             false, Encoding.GetEncoding("UTF-8"));
 
         // ラベルを書き込む
-        string[] labels = { "Success", "FishNumber", "ClearTime", "Distance", "Sensitivity", "LimitedTime", "MaximumSpeed", "Acceleration", "Friction" };
+        string[] labels = { "Success", "ShareHaptic", "FishNumber", "ClearTime", "Distance", "Sensitivity", "LimitedTime", "MaximumSpeed", "Acceleration", "Friction" };
 
         // 文字列配列のすべての要素を「,」で連結する
         string label = string.Join(",", labels);
@@ -65,10 +65,10 @@ public class GameDataExport : MonoBehaviour
         trailSW.WriteLine(label);
     }
 
-    public static void ExportGameData(bool success, int fishNumber, string clearTime, float distance, List<Trail> trail,
+    public static void ExportGameData(bool success, bool shareHaptic, int fishNumber, string clearTime, float distance, List<Trail> trail,
         float sensitivity, int limitedTime, float maximumSpeed, float acceleration, float friction)
     {
-        string[] score = { success.ToString(), fishNumber.ToString(), clearTime, distance.ToString(), sensitivity.ToString(), limitedTime.ToString(), maximumSpeed.ToString(), acceleration.ToString(), friction.ToString() };
+        string[] score = { success.ToString(), shareHaptic.ToString(), fishNumber.ToString(), clearTime, distance.ToString(), sensitivity.ToString(), limitedTime.ToString(), maximumSpeed.ToString(), acceleration.ToString(), friction.ToString() };
         string scoreData = string.Join(",", score);
         scoreSW.WriteLine(scoreData);
 

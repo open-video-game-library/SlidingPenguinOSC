@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using OscCore;
 using penguin;
 
@@ -30,6 +31,7 @@ public class OSCInputManager : MonoBehaviour
         else { oscStatus = 0; }
 
         ExportStatus();
+        ExportHapticStatus();
     }
 
     public void InputMovingSpeed(Vector3 inputSpeed)
@@ -48,8 +50,14 @@ public class OSCInputManager : MonoBehaviour
         if (PenguinBehavior.isReceiveOSCInput)
         {
             int status = oscStatus;
-            Debug.Log(status);
             client.Send("/status", status);
         }
+    }
+
+    public void ExportHapticStatus()
+    {
+        int status = Convert.ToInt32(ParameterManager.shareHaptic);
+        client.Send("/hapticStatus", status);
+        Debug.Log(status);
     }
 }
