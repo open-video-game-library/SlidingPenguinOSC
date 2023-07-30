@@ -47,7 +47,7 @@ namespace penguin
 
             // データポスト
             // outputDataManager.PostData(true, FishManager.GetAcquiredNumber(), timeKeeper.elapsedTime.ToString(), 200.0f, ParameterManager.sensitivity, ParameterManager.limitedTime); 
-            GameDataExport.ExportGameData(true, FishManager.GetAcquiredNumber(), timeKeeper.elapsedTime.ToString(), 200.0f, PenguinBehavior.penguinTrail,
+            GameDataExport.ExportGameData(true, ParameterManager.shareHaptic, FishManager.GetAcquiredNumber(), timeKeeper.elapsedTime.ToString(), 200.0f, PenguinBehavior.penguinTrail,
                 ParameterManager.sensitivity, ParameterManager.limitedTime, ParameterManager.maximumSpeed, ParameterManager.acceleration, ParameterManager.friction);
 
             // ペンギンを停止させ、操作をoffにする

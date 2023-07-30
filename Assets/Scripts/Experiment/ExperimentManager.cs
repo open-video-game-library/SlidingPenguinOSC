@@ -73,6 +73,7 @@ public class ExperimentManager : MonoBehaviour
         SetAccelerationValue(ParameterReader.parameterDatas[trialCount][3]);
         SetFrictionValue(ParameterReader.parameterDatas[trialCount][4]);
         SetWaitTimeNextValue(ParameterReader.parameterDatas[trialCount][5]);
+        SetShareHapticValue(ParameterReader.parameterDatas[trialCount][6]);
     }
 
     private void SetSensitivityValue(string value)
@@ -109,5 +110,11 @@ public class ExperimentManager : MonoBehaviour
     {
         if (!float.TryParse(value, out float floatValue) || floatValue < 0.0f) { return; }
         ParameterManager.waitTimeNext = floatValue;
+    }
+
+    private void SetShareHapticValue(string value)
+    {
+        if (!bool.TryParse(value, out bool boolValue)) { return; }
+        ParameterManager.shareHaptic = boolValue;
     }
 }
