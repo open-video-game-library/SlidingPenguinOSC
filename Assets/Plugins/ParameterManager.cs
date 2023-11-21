@@ -10,6 +10,7 @@ public class ParameterManager : MonoBehaviour
     public static float friction = 0.9990f;
 
     // experiment parameters
+    public static bool fish = true;
     public static bool gameEffect = true;
     public static bool respawn = true;
     public static bool playConsecutively = true;
