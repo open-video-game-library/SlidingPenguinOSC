@@ -20,6 +20,9 @@ namespace  penguin
         // 魚獲得時のSE再生処理を参照
         [SerializeField] private InGameAudio audio;
 
+        // 現在のステータスを管理するクラス
+        [SerializeField] private InGameStatusManager statusManager;
+
         private static int maximumFishNumber;
 
         private void Start()
@@ -32,6 +35,7 @@ namespace  penguin
         {
             if(other.gameObject.tag== "Fish")
             {
+                if (statusManager.CurrentStatus == InGameStatus.CourseOut) { return; }
                 FishNumber ++;
                 fishNumberText.text = "×" + FishNumber;
                 audio.itemAcquire.Play();

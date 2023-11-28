@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayConsecutivelyToggleController : MonoBehaviour
+public class EditDetailParametersToggleController : MonoBehaviour
 {
     private Toggle toggle;
 
@@ -11,11 +11,11 @@ public class PlayConsecutivelyToggleController : MonoBehaviour
     void Start()
     {
         toggle = GetComponent<Toggle>();
-        toggle.isOn = ParameterManager.playConsecutively;
+        toggle.isOn = !ParameterManager.usePhysics;
     }
 
     public void SetSetting()
     {
-        ParameterManager.playConsecutively = toggle.isOn;
+        ParameterManager.usePhysics = !toggle.isOn;
     }
 }

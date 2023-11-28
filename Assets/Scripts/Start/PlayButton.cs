@@ -24,7 +24,7 @@ namespace penguin
 
         private void Clicked()
         {
-            if (ParameterManager.playConsecutively) { parameterReader.SetParameters(ExperimentManager.trialCount); }
+            if (ParameterManager.continuousPlay) { parameterReader.SetParameters(ExperimentManager.trialCount); }
             GameDataExport.CreateScoreCSV();
             GameDataExport.CreateTrailCSV();
 

@@ -22,7 +22,7 @@ public class InputFieldManager : MonoBehaviour
 
     void Update()
     {
-        if (ParameterManager.playConsecutively)
+        if (ParameterManager.continuousPlay)
         {
             sensitivity.interactable = false;
             limitedTime.interactable = false;
@@ -32,11 +32,22 @@ public class InputFieldManager : MonoBehaviour
         }
         else
         {
-            sensitivity.interactable = true;
             limitedTime.interactable = true;
-            maximumSpeed.interactable = true;
-            acceleration.interactable = true;
-            friction.interactable = true;
+
+            if (ParameterManager.usePhysics)
+            {
+                sensitivity.interactable = true;
+                maximumSpeed.interactable = false;
+                acceleration.interactable = false;
+                friction.interactable = false;
+            }
+            else
+            {
+                sensitivity.interactable = false;
+                maximumSpeed.interactable = true;
+                acceleration.interactable = true;
+                friction.interactable = true;
+            }
         }
     }
 

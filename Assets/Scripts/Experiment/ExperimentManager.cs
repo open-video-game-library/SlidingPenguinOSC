@@ -28,12 +28,12 @@ public class ExperimentManager : MonoBehaviour
     {
         finish = trialCount == trialNum;
 
-        homeButton.interactable = !ParameterManager.playConsecutively || finish;
-        retryButton.interactable = !ParameterManager.playConsecutively;
-        informationPanel.SetActive(ParameterManager.playConsecutively);
+        homeButton.interactable = !ParameterManager.continuousPlay || finish;
+        retryButton.interactable = !ParameterManager.continuousPlay;
+        informationPanel.SetActive(ParameterManager.continuousPlay);
 
-        if (ParameterManager.playConsecutively && !finish) { StartCoroutine("AutoRetry"); }
-        else if (ParameterManager.playConsecutively && finish) { message.text = "The experiment is finished. Thank you for your hard work."; }
+        if (ParameterManager.continuousPlay && !finish) { StartCoroutine("AutoRetry"); }
+        else if (ParameterManager.continuousPlay && finish) { message.text = "The experiment is finished. Thank you for your hard work."; }
     }
 
     // Update is called once per frame

@@ -19,7 +19,7 @@ public class ReadCSVButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        readCSVButton.interactable = !ParameterManager.playConsecutively;
+        readCSVButton.interactable = !ParameterManager.continuousPlay;
     }
 
     public void OnClickButton()

@@ -16,25 +16,33 @@ public class RespawnManager : MonoBehaviour
     // InGameシーンのSE再生・停止クラス
     [SerializeField] private InGameAudio audio;
 
+    // 復活できる箇所を管理するクラス
+    [SerializeField] private CheckPointsManager checkPoints;
+
     [SerializeField] private RespawnCamera respawnCamera;
 
     public IEnumerator Respawn()
     {
-        InGameStatus originalState = statusManager.CurrentStatus;
+        if (statusManager.CurrentStatus == InGameStatus.InGameNormal || statusManager.CurrentStatus == InGameStatus.HurryUp)
+        {
+            InGameStatus originalState = statusManager.CurrentStatus;
+            Vector3 originalPenguinPosition = penguin.transform.position;
 
-        // ペンギンを停止させ、操作をoffにする
-        StartCoroutine(penguinBehavior.Stop(0.5f));
-        penguinModel.SetActive(false);
-        audio.drop.Play();
-        statusManager.CurrentStatus = InGameStatus.CourseOut;
-        
-        // ペンギンをスタート地点に戻す処理
-        yield return new WaitForSeconds(1.50f);
-        respawnCamera.Teleport();
-        penguin.transform.position = Vector3.zero;
-        penguin.transform.eulerAngles = Vector3.zero;
-        penguin.GetComponent<PenguinBehavior>().enabled = true;
-        penguinModel.SetActive(true);
-        statusManager.CurrentStatus = originalState;
+            // ペンギンを停止させ、操作をoffにする
+            StartCoroutine(penguinBehavior.Stop(0.5f));
+            penguinModel.SetActive(false);
+            audio.drop.Play();
+            statusManager.CurrentStatus = InGameStatus.CourseOut;
+
+            // ペンギンをスタート地点に戻す処理
+            yield return new WaitForSeconds(1.50f);
+
+            respawnCamera.Teleport();
+            penguin.transform.position = checkPoints.DecideRespawnPosition(originalPenguinPosition);
+            penguin.transform.eulerAngles = Vector3.zero;
+            penguin.GetComponent<PenguinBehavior>().enabled = true;
+            penguinModel.SetActive(true);
+            statusManager.CurrentStatus = originalState;
+        }
     }
 }
