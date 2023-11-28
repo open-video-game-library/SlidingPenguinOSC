@@ -40,7 +40,7 @@ namespace penguin
 
         // OSC入力を受け取る際に用いる。isReceiveOSCInputがtrueのとき、OSC入力でキャラクターを動かす。
         [SerializeField] private OSCInputManager osc;
-        [SerializeField] public static bool isReceiveOSCInput;
+        [SerializeField] public static bool isReceiveOSCInput = true;
 
         // ペンギンの現在の移動速度。
         private Vector3 speed;
@@ -53,9 +53,6 @@ namespace penguin
 
         // ペンギンの基本感度。大きいほど入力に対する移動量が大きい。
         private float sensitivity;
-
-        // trueの場合、ペンギンの動きをAddForceメソッドで制御する。falseの場合は、スクリプトから制御する。
-        [SerializeField] private bool usePhysics = false;
 
         // 加速フラグ。速度を変更するために使用する。
         private bool speedUp;
@@ -104,7 +101,7 @@ namespace penguin
                     vertical = Input.GetAxis("Vertical");
                 }
 
-                if (usePhysics)
+                if (ParameterManager.usePhysics)
                 {
                     // 移動入力があった際の処理
                     if (vertical != 0.0f || horizon != 0.0f)
@@ -210,7 +207,7 @@ namespace penguin
 
         public IEnumerator Stop(float stopTime)
         {
-            if (usePhysics)
+            if (ParameterManager.usePhysics)
             {
                 yield return new WaitForSeconds(stopTime);
                 penguinRigidBody.velocity = Vector3.zero;

@@ -11,9 +11,12 @@ public class ParameterManager : MonoBehaviour
 
     // experiment parameters
     public static bool fish = true;
-    public static bool gameEffect = true;
+    public static bool gameEffect = false;
     public static bool respawn = true;
-    public static bool playConsecutively = true;
+    public static bool continuousPlay = false;
     public static float waitTimeNext = 5.0f;
     public static bool shareHaptic = false;
+
+    // for development
+    public static bool usePhysics = true;
 }

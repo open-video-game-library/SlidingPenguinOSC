@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using penguin;
 
-public class OSCControlToggleController : MonoBehaviour
+public class ContinuousPlayToggleController : MonoBehaviour
 {
     private Toggle toggle;
 
@@ -12,11 +11,11 @@ public class OSCControlToggleController : MonoBehaviour
     void Start()
     {
         toggle = GetComponent<Toggle>();
-        toggle.isOn = PenguinBehavior.isReceiveOSCInput;
+        toggle.isOn = ParameterManager.continuousPlay;
     }
 
-    public void SetOSCControlSetting()
+    public void SetSetting()
     {
-        PenguinBehavior.isReceiveOSCInput = toggle.isOn;
+        ParameterManager.continuousPlay = toggle.isOn;
     }
 }

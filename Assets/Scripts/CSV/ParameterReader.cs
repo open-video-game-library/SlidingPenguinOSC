@@ -27,7 +27,7 @@ public class ParameterReader : MonoBehaviour
             parameterDatas.Add(splitLine);
         }
         ExperimentManager.trialNum = parameterDatas.Count - 1;
-        Debug.Log(ExperimentManager.trialNum + "回の試行を行います．");
+        Debug.Log("Continuous Play が ON の場合，" + ExperimentManager.trialNum + "回の試行を行います．");
     }
 
     public void SetParameters(int trialCount)
