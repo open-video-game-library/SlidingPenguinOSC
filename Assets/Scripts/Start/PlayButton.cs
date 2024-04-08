@@ -15,11 +15,25 @@ namespace penguin
         [SerializeField] private HomeUISwitcher uiSwitcher;
 
         [SerializeField] private ParameterReader parameterReader;
+
+        [SerializeField] private OSCGameStartManager oscStartInput;
+
+        private bool isStarted;
         
         // Start is called before the first frame update
         private void Start()
         {
             gameObject.GetComponent<Button>().onClick.AddListener(Clicked);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (oscStartInput.start && !isStarted)
+            {
+                isStarted = true;
+                Clicked();
+            }
         }
 
         private void Clicked()
