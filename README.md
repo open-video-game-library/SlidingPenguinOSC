@@ -1,107 +1,79 @@
 # Sliding Penguin OSC
 
-Sliding Penguin OSCは、オープンビデオゲームライブラリが提供するSliding PenguinをOSCによる操作に対応させたものです。
+[日本語版README](https://github.com/open-video-game-library/SlidingPenguinOSC/blob/main/README.JP.md)
 
-Touch DesignerなどからOSCを送信することで、特殊なコントローラからの制御が可能になります。
+Sliding Penguin OSC is a version of Sliding Penguin provided by the Open Video Game Library for control by OSC.
+
+By sending OSC from Touch Designer or other applications, control from a special controller becomes possible.
 
 ![SlidingPenguin](https://user-images.githubusercontent.com/71160720/222035563-a278f647-33f1-4d93-ba49-c4aefe5f5602.jpg)
 
 
-## ゲーム詳細
+## Game Details
 
 
-### ルール
+### Rules
 
-クリア条件
-- 操作するペンギンが、海に落ちたり、画面外にいくことなくゴールに辿り着く
+Clear Conditions:
+- The controlled penguin reaches the goal without falling into the sea.
 
-ゲームオーバー条件
-- ペンギンの体が氷の外に出て、海に落ちる
-- 設定された制限時間をオーバーする
+Game Over Conditions:
+- The penguin's body goes off the ice and falls into the sea.
+- Exceeding the set time limit.
 
-タスク
-- 道中に落ちている魚を集める。ゴールまで辿り着ことが最優先。
+Tasks:
+- Collect fish scattered throughout the journey. Priority is to reach the goal.
 
 
 
-### 操作方法
+### Controls
 
-- キーボード操作
-![image](https://user-images.githubusercontent.com/71160720/195009697-ebcbc349-851d-403d-b26a-79e8720eb16d.png)
+- Keyboard Controls
+![figure_page-0004](https://github.com/open-video-game-library/SlidingPenguin/assets/63552585/0797b2ad-cd6e-417e-8364-14e0a5a63047)
 
-- ゲームパッド操作
-![SlidingPenguin_control](https://user-images.githubusercontent.com/126433429/224565635-1089822c-00e6-4140-bd1b-6c7ae86327fa.png)
+
+- Gamepad Controls
+![figure_page-0002](https://github.com/open-video-game-library/SlidingPenguin/assets/63552585/778f5d3e-4c88-45c7-ba81-63c0be37da68)
 
 
 ## Features
 
-パラメータ調整機能
-- 移動感度
-- 制限時間
-- ペンギンの速さの上限
-- ペンギンの加速度
-- 滑りやすさ
+Parameter Adjustment Features:
+- Movement Sensitivity
+- Time Limit
 
-パラメータ出力機能
-- 成否
-- 入手したサカナの数
-- クリア時間
-- 移動距離
-- 移動感度
-- 制限時間
+Parameter Output Features:
+- Success/Failure
+- Number of Fish Collected
+- Clearing Time
+- Travel Distance
+- Movement Sensitivity
+- Time Limit
 
 
-### 研究利用例
+### Research Usage Examples
 
-ゲーム体験の主観評価法の提案研究
-- 感情の変化が現れやすいゲームであり、かつ学習しやすいため、実験利用に適している。
+Game Experience Subjective Evaluation Study:
+- Suitable for experimental use as the game easily reflects emotional changes and is easy to learn.
 
-コントローラデバイスの提案研究
-- 自動的に進み、かつツルツル滑る氷のステージの特性から、連続的な制御を必要とするゲームになっているため、コントローラデバイスの評価に適している。
+Controller Device Proposal Study:
+- Due to the characteristics of the icy stage that automatically progresses and is slippery, it's a game that requires continuous control, making it suitable for controller device evaluation.
+
 
 ## Requirement
 
-Unity2021.3.4f1
+Unity2021.3.5f1
 
 
 ## Licence
 
-1. SlidingPenguinOSCは無料でご利用できます。
+This content is licensed under the [MIT License](https://github.com/open-video-game-library/SlidingPenguinOSC/blob/main/LICENSE.md).
 
-2. 営利目的・公序良俗に反する目的でない限り、研究目的での利用を含め、あらゆる用途で利用できます。
+## Use in Research
 
-3. ダウンロードしたデータを改変し、ご利用いただいても構いません。
-
-4. 利用報告をする必要はありませんが、改変したデータを二次配布する場合を含め、ゲーム名 を利用した場合は、その旨を明記して下さい。
-
-5. SlidingPenguinOSCを研究で利用する場合は、ご自身の論文内で以下の論文を引用して下さい。
-
-- [研究利用しやすく標準性を目指したビデオゲームの設計と開発](http://id.nii.ac.jp/1001/00212465/)
-```
-@inproceedings{weko_212571_1,
-   author	 = "拓也,岡 and 拓也,川島 and 大智,林 and 恵太,渡邊",
-   title	 = "研究利用しやすく標準性を目指したビデオゲームの設計と開発",
-   booktitle	 = "エンタテインメントコンピューティングシンポジウム論文集",
-   year 	 = "2021",
-   volume	 = "2021",
-   number	 = "",
-   pages	 = "181--186",
-   month	 = "aug"
-}
-```
-
-
-## Note
-
-- SlidingPenguinOSCからダウンロードしたものを、自身が開発したものと偽って公開する行為はご遠慮下さい。
-
-- SlidingPenguinOSCを利用したことによるトラブル/損害が発生した場合、一切の責任を負いません。
-
-- SlidingPenguinOSCのコンテンツや利用規約は、予告なしに変更される場合があります。
-
-- SlidingPenguinOSCではゲーム内のパラメータを変更できますが、研究の公平性や再現性を保つために、設定したパラメータの値を明示するようにしてください。
+[Recommendations for research use of this content](https://github.com/open-video-game-library/SlidingPenguinOSC/blob/main/RESEARCH_USE.md)
 
 ## Contact
 
-意見や要望、質問などがありましたら、[こちら](https://openvideogame.cc/contact)からお問い合わせ下さい。
+If you have feedback, requests, or questions, please [contact us here.](https://openvideogame.cc/contact)
 
