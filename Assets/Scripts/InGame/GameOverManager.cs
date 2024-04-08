@@ -98,7 +98,7 @@ namespace penguin
         private IEnumerator LoadResultScene()
         {
             yield return new WaitForSeconds(3.0f);
-            SceneManager.LoadScene("Result");
+            SceneManager.LoadScene("Start");
         }
     }
 }
